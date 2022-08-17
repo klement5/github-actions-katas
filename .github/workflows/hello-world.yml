@@ -6,6 +6,7 @@ env:
   GIT_COMMIT: ${{ github.sha }}
 jobs:
   Clone-down: 
+    name: Clone down repo
     runs-on: ubuntu-latest
     container: gradle:6-jdk11
     steps:
@@ -17,8 +18,8 @@ jobs:
           name: code
           path: .      
   Build:
-    needs: Clone-down
     runs-on: ubuntu-latest
+    needs: Clone-down
     container: gradle:6-jdk11
     steps:
       - name: Download Repo
@@ -42,10 +43,10 @@ jobs:
           path: app/build/libs/app-0.1-all.jar  
   Docker-image:
     runs-on: ubuntu-latest
-    needs: Build
+    needs: [Build,Test]
     steps:
       - name: Download code
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v1
         with:
           name: code
           path: .
