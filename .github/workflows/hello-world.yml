@@ -64,6 +64,7 @@ jobs:
   Performance-test:
     runs-on: ubuntu-latest
     container: gradle:6-jdk11
+    needs: Docker-image
     steps:
       - name: Execute component test
         run: chmod +x ci/performance-test.sh && GIT_COMMIT="GA-$GITHUB_SHA" && ci/performance-test.sh
