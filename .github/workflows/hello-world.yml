@@ -71,7 +71,7 @@ jobs:
     - name: Execute performance test
       run: chmod +x ci/performance-test.sh && ci/performance-test.sh
   Component-test:
-    runs-on: self-hosted
+    runs-on: [self-hosted]
     needs: Docker-image
     steps:
     - name: Download code
